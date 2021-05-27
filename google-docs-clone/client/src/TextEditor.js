@@ -3,10 +3,6 @@ import Quill from 'quill'
 import "quill/dist/quill.snow.css"
 import { io } from 'socket.io-client';
 
-const TOOLBAR_OPTIONS = [
-
-]
-
 export default function TextEditor() {
     const [socket, setSocket] = useState()
     const [quill, setQuill] = useState()
@@ -17,7 +13,7 @@ export default function TextEditor() {
         return () => {
             s.disconnect()
         }
-    })
+    }, [])
 
     const wrapperRef = useCallback((wrapper) => {
         if(wrapper == null) return
@@ -34,6 +30,7 @@ export default function TextEditor() {
             if(source !== 'user') return
             socket.emit("send-changes", delta)
         }
+        socket.on()
 
         quill.on('text-change', handler)
 
